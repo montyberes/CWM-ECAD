@@ -30,7 +30,36 @@ module logicalunit(
     );
     
     wire   out;
+	//ab = {a,b}
+    assign out=((a==0) && (b==0))?func[0]:
+		 ((a==0) && (b==1))?func[1]:
+		 ((a==1) && (b==0))?func[2]:
+		 func[3];
+endmodule
+	//assign out = (a&&b)?func
+	//if (a ==0 && b==0)
+	//  assign out = func[0]
+	//else
+ 	//  if (a==0 && b==0)
+	//    assign out = func[1]
+	 // else
+	 //   if (a==1 && b==0)
+	  //	assign out = func[2]
+	   // else 
+		//assign out = func[3]
+	
+
+	
+	
+    //assign out = (ab==2'b00)? func[0]:
+	//(ab ==2'b01)? func[1]:
+	//(ab==2'b10)? func[2]:
+	//func[3]
+
+
+
+	
          
       //Todo: add you logic here
 
-endmodule
+
