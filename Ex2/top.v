@@ -24,10 +24,13 @@ module mux(
     //Todo: define inputs here
 	input a,
 	input b,
-	input clk,
 	input sel,
-	output reg out
+	output out
     );
+  assign out=(sel==0)?a:b;
+endmodule
+
+
 	
     	//wire[1:0]out;
     //Todo: define registers and wires here
@@ -35,14 +38,16 @@ module mux(
 	//reg [5:0]t;
 	
 
-	always @(posedge clk)begin
-		if (sel==0)begin
-		 out<=a;
-		else
-		 out<=b;
-		end
-	end
-endmodule
+	//always @(posedge clk)
+	//begin
+	        //begin
+
+	//if (sel==0)
+	 // out<=a;
+	//else
+	 // out<=b;
+	//end
+
 //assign out =(sel==0)?a:b;
 	
 	 //if(sel==0)
