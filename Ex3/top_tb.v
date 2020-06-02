@@ -14,15 +14,76 @@ module top_tb(
     );
     
 //Todo: Parameters
-
+	parameter CLK_PERIOD = 10;
 //Todo: Regitsers and wires
+	reg rst;
+	reg enable;
+	reg direction;
+	reg clk;
+	reg err;
+	reg [7:0]counter_out_prev;
+	wire [7:0]counter_out;
+
 
 //Todo: Clock generation
+	initial begin
+     	  clk=1'b0;
+    	forever #(CLK_PERIOD/2) clk=~clk;
+	end
 
 //Todo: User logic
+	initial begin
+	  //counter_out_prev =8'b00000000;
+  	  rst=0;
+  	  enable=0;
+  	  direction=1;
+   	  #5 rst=0;
+  	  enable=1;
+  	  direction=1;
+          #5 rst=0;
+  	  enable=1;
+  	  direction=1;
+  	  #5 rst=1;
+  	  enable=0;
+  	  direction=10;
+	  #5 rst=0;
+  	  enable=1;
+  	  direction=1;
+  //counter_out = 8'b00000000
+ 	forever begin
+   	  #40
+   	  if ((rst==1)&&(counter_out==8'b00000000))
+		begin
+		$display("***TEST FAILED! rst==%d, enable==%d, direction==%d, counter_out_prev==%d***", rst, enable, direction, counter_out, counter_out_prev);
+	    err =1;
+    	  end 
+
+	else
+	   err =0;
+	//  if ((enable==0)&&(counter_out_prev!=))
+  	end
+ 	end
+   
     
 //Todo: Finish test, check for success
 
+     //Finish simulation and check for success
+     initial begin
+        #50
+        if (err==0)
+          $display("***TEST PASSED! :) ***");
+        $finish;
+      end
+     
+
 //Todo: Instantiate counter module
- 
+
+counter top(
+    //Todo: add ports 
+	.clk (clk),
+	.rst (rst),
+	.enable (enable),
+	.direction (direction),
+	.counter_out (counter_out)
+);
 endmodule 
