@@ -34,7 +34,7 @@ module top_tb(
 
 //Todo: User logic
 	initial begin
-
+ 	  counter_out_prev=0;
 	  err=0;
   	  rst=0;
   	  enable=1;
@@ -54,8 +54,9 @@ module top_tb(
 	end
 	initial begin
  	forever begin
-	  counter_out_prev=counter_out;
+	  
    	  #(5*CLK_PERIOD)
+	counter_out_prev=counter_out;
    	  if ((rst==1)&&(counter_out==0))
 		begin
 		$display("***TEST FAILED! rst==%d, enable==%d, direction==%d, counter_out==%d***", rst, enable, direction, counter_out, counter_out_prev);
