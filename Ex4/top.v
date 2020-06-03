@@ -21,15 +21,15 @@ module dice(
 	input button,
 	input clk,
 	input rst,
-	output reg [3:0]throw
+	output reg [2:0]throw
 	);
 	
 	always@(posedge clk)
 	if (rst) begin
-	  throw=0;
+	  throw<=0;
 	end
 	else if ((throw==3'b000)||(throw==3'b111))begin
-	throw =3'b001;
+	throw <=3'b001;
 	end
 	else if(throw==3'b110)begin
 	throw<=(button==1)?3'b001:throw;
