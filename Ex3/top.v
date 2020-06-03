@@ -25,12 +25,11 @@ module counter(
 	input enable,
 	input direction,
 	output reg [7:0]counter_out
-	output reg [7:0]counter_out_prev;
     );
 
-	assign counter_out=counter_out_prev;
+	//assign counter_out=counter_out_prev;
 	always@(posedge clk)
-	if (rst) begin
+	if (rst==1) begin
 	   counter_out=0;
 	end
 	else  begin

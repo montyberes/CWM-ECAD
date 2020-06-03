@@ -21,7 +21,7 @@ module top_tb(
 	reg direction;
 	reg clk;
 	reg err;
-	wire [7:0]counter_out_prev;
+	reg [7:0]counter_out_prev;
 	wire [7:0]counter_out;
 
 
@@ -34,25 +34,28 @@ module top_tb(
 
 //Todo: User logic
 	initial begin
+
 	  err=0;
   	  rst=0;
-  	  enable=0;
+  	  enable=1;
   	  direction=1;
    	  #5 rst=0;
   	  enable=1;
   	  direction=1;
           #5 rst=0;
-  	  enable=1;
+  	  enable=0;
   	  direction=1;
   	  #5 rst=1;
-  	  enable=0;
+  	  enable=1;
   	  direction=1;
 	  #5 rst=0;
   	  enable=1;
-  	  direction=1;
-
+  	  direction=0;
+	end
+	initial begin
  	forever begin
-   	  #CLK_PERIOD
+	  counter_out_prev=counter_out;
+   	  #(5*CLK_PERIOD)
    	  if ((rst==1)&&(counter_out==0))
 		begin
 		$display("***TEST FAILED! rst==%d, enable==%d, direction==%d, counter_out==%d***", rst, enable, direction, counter_out, counter_out_prev);
@@ -72,8 +75,12 @@ module top_tb(
 	   err = err+1;
 	//  if ((enable==0)&&(counter_out_prev!=))
   	end
+	else begin
+	err =0;
+	end
  	end
 	end
+	
    
     
 //Todo: Finish test, check for success
