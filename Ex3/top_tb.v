@@ -21,19 +21,20 @@ module top_tb(
 	reg direction;
 	reg clk;
 	reg err;
-	reg [7:0]counter_out_prev;
+	wire [7:0]counter_out_prev;
 	wire [7:0]counter_out;
 
 
 //Todo: Clock generation
-	initial begin
+	initial 
+	begin
      	  clk=1'b0;
     	forever #(CLK_PERIOD/2) clk=~clk;
 	end
 
 //Todo: User logic
 	initial begin
-	  //counter_out_prev =8'b00000000;
+	  err=0;
   	  rst=0;
   	  enable=0;
   	  direction=1;
@@ -45,24 +46,34 @@ module top_tb(
   	  direction=1;
   	  #5 rst=1;
   	  enable=0;
-  	  direction=10;
+  	  direction=1;
 	  #5 rst=0;
   	  enable=1;
   	  direction=1;
-  //counter_out = 8'b00000000
- 	forever begin
-   	  #40
-   	  if ((rst==1)&&(counter_out==8'b00000000))
-		begin
-		$display("***TEST FAILED! rst==%d, enable==%d, direction==%d, counter_out_prev==%d***", rst, enable, direction, counter_out, counter_out_prev);
-	    err =1;
-    	  end 
 
-	else
-	   err =0;
+ 	forever begin
+   	  #CLK_PERIOD
+   	  if ((rst==1)&&(counter_out==0))
+		begin
+		$display("***TEST FAILED! rst==%d, enable==%d, direction==%d, counter_out==%d***", rst, enable, direction, counter_out, counter_out_prev);
+	    err = err+1;
+	  end
+    	  else if ((enable==0)&& (counter_out!=counter_out_prev)) begin
+		$display("***TEST FAILED! rst==%d, enable==%d, direction==%d, counter_out==%d***", rst, enable, direction, counter_out, counter_out_prev);
+	   err = err+1;
+	end
+	else if ((direction==1)&&(counter_out>counter_out_prev))begin
+		$display("***TEST FAILED! rst==%d, enable==%d, direction==%d, counter_out==%d***", rst, enable, direction, counter_out, counter_out_prev);
+	   err = err+1;
+	//  if ((enable==0)&&(counter_out_prev!=))
+	end
+	else if ((direction==0)&&(counter_out<counter_out_prev))begin
+		$display("***TEST FAILED! rst==%d, enable==%d, direction==%d, counter_out==%d***", rst, enable, direction, counter_out, counter_out_prev);
+	   err = err+1;
 	//  if ((enable==0)&&(counter_out_prev!=))
   	end
  	end
+	end
    
     
 //Todo: Finish test, check for success

@@ -25,14 +25,17 @@ module counter(
 	input enable,
 	input direction,
 	output reg [7:0]counter_out
+	output reg [7:0]counter_out_prev;
     );
-	reg [7:0]counter_out_prev;
-	//assign counter_out=counter_out_prev;
+
+	assign counter_out=counter_out_prev;
 	always@(posedge clk)
-	if (rst)
+	if (rst) begin
 	   counter_out=0;
-	else
-   		counter_out<=(enable==0)?counter_out:(direction==1)?counter_out+1:counter_out - 1;	
+	end
+	else  begin
+   		counter_out<=(enable==0)?counter_out:(direction==1)?counter_out+1:counter_out - 1; 		end	
+	
 endmodule
  // if(rst)
    //counter_out <= 8'b00000000;
