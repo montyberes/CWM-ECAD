@@ -35,7 +35,7 @@ module dice(
 	throw<=(button==1)?3'b001:throw;
 	end
 	else begin
-	throw<=(button==0)?throw:throw+1;
+	throw<=(button==0)?throw:throw+3'b001;
 	end
 endmodule
  

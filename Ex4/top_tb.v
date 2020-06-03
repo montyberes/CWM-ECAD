@@ -26,115 +26,63 @@ module top_tb(
 	end
 
 	initial begin
-	  prev_throw=3'b000;
-	  err=0;
-	  button=0;
-	  rst =0;
-	//prev_throw=throw;
-	  #5 
-	  	
-	  rst=0;
-	  button=1;
-	  if (throw!=3'b001) begin
-	     $display("***TEST FAILED! rst==%d, button==%d, throw==%d, prev_throw==%d***", rst, button, throw, prev_throw);
-	  err =err+1;
-	  end 
-	  else begin
-	   err = err;
-	  end
-	prev_throw=throw;
-	  #5 
-	  rst=0;
-	  button=1;	
-	if (throw!=3'b010) begin
-	     $display("***TEST FAILED! rst==%d, button==%d, throw==%d, prev_throw==%d***", rst, button, throw, prev_throw);
-	  err =err+1;
-	  end 
-	  else begin
-	   err = err;
-	  end
-prev_throw=throw;
-	  #5 
-	  rst=0;
-	  button=1;
-	   if (throw!=3'b011) begin
-	     $display("***TEST FAILED! rst==%d, button==%d, throw==%d, prev_throw==%d***", rst, button,   throw, prev_throw);
-	  err =err+1;
-	  end 
-	  else begin
-	   err = err;
-	  end
-prev_throw=throw;
-	  #5 
-	 rst=0;
-	  button=1;
-	if (throw!=3'b100) begin
-	     $display("***TEST FAILED! rst==%d, button==%d, throw==%d, prev_throw==%d***", rst, button, throw, prev_throw);
-	  err =err+1;
-	end 
-	  else begin
-	   err = err;
-	  end
-prev_throw=throw;
-	#5 
-	 rst=0;
-	  button=1;
-	if (throw!=3'b100) begin
-	     $display("***TEST FAILED! rst==%d, button==%d, throw==%d, prev_throw==%d***", rst, button, throw, prev_throw);
-	  err =err+1;
-	end 
-	  else begin
-	   err = err;
-	  end
-prev_throw=throw;
-	#5 
-	 rst=0;
-	  button=1;
-	if (throw!=3'b101) begin
-	     $display("***TEST FAILED! rst==%d, button==%d, throw==%d, prev_throw==%d***", rst, 		button, throw, prev_throw);
-	  err =err+1;
-	  end 
-	  else begin
-	   err = err;
-	  end
-prev_throw=throw;
-	#5 
-	 rst=0;
-	  button=1;
-	if (throw!=3'b110) begin
-	     $display("***TEST FAILED! rst==%d, button==%d, throw==%d, prev_throw==%d***", rst, button, throw, prev_throw);
-	  err =err+1;
-	end 
-	  else begin
-	   err = err;
-	  end
-prev_throw=throw;
-	#5 
-	 rst=0;
-	  button=1;
-	if (throw!=3'b001) begin
-	     $display("***TEST FAILED! rst==%d, button==%d, throw==%d, prev_throw==%d***", rst, button, throw, prev_throw);
-	  err =err+1;
-	end 
-	  else begin
-	   err = err;
-	  end
-prev_throw=throw;
-	#5 
-	 rst=0;
-	  button=1;
-	if (throw!=3'b010) begin
-	     $display("***TEST FAILED! rst==%d, button==%d, throw==%d, prev_throw==%d***", rst, button, throw, prev_throw);
-	  err =err+1;
-	end 
-	  else begin
-	   err = err;
-	  end
+	forever begin
+	#(5*CLK_PERIOD)
+	if (button==1) begin
+	prev_throw<=(prev_throw<3'h6)?prev_throw+1:3'h1;
+	end
+	if (prev_throw!=throw)begin
+	$display("***TEST FAILED! rst==%d, button==%d, throw==%d, prev_throw==%d***", rst, button, throw, prev_throw);
+	  err =1;
+	end
+	else begin
+	err=0;
+	end
+	end
+end
+	
+
+initial begin
+	prev_throw=3'b000;
+	err=0;
+	button=1;
+	rst=0;
+	#5
+	button=1;
+	rst=0;
+	#5
+	button=1;
+	rst=0;
+	#5
+	button=1;
+	rst=0;
+	#5
+	button=1;
+	rst=0;
+	#5
+	button=1;
+	rst=0;
+	#5
+	button=1;
+	rst=0;
+	#5
+	button=1;
+	rst=0;
+	#5
+	button=1;
+	rst=0;
+	#5
+	button=1;
+	rst=0;
+	#5
+	button=0;
+	rst=0;
 	end
 	
 	
+	
 initial begin
-        #50
+        #500
         if (err==0)
           $display("***TEST PASSED! :) ***");
         $finish;
