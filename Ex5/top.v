@@ -22,7 +22,7 @@ module lights(
 	);
 initial begin
 	red=1;
-	amber=0;
+	amber=1;
 	green=0;
 end
 
