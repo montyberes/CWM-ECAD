@@ -26,7 +26,7 @@ module dice(
 	
 	always@(posedge clk)
 	if (rst) begin
-	  throw<=0;
+	  throw<=3'b000;
 	end
 	else if ((throw==3'b000)||(throw==3'b111))begin
 	throw <=3'b001;

@@ -26,12 +26,13 @@ module top_tb(
 	end
 
 	initial begin
+	//#5
 	forever begin
-	#(5*CLK_PERIOD)
-	if (button==1) begin
-	prev_throw<=(prev_throw<3'h6)?prev_throw+1:3'h1;
-	end
-	if (prev_throw!=throw)begin
+	prev_throw=throw;
+	#5
+	//if (button==1) begin
+	//prev_throw<=(prev_throw<3'h6)?prev_throw+1:3'h1;
+	if ((button==1)&(prev_throw!=throw))begin
 	$display("***TEST FAILED! rst==%d, button==%d, throw==%d, prev_throw==%d***", rst, button, throw, prev_throw);
 	  err =1;
 	end
@@ -43,8 +44,27 @@ end
 	
 
 initial begin
+	#5
 	prev_throw=3'b000;
 	err=0;
+	button=1;
+	rst=1;
+	#5
+	button=1;
+	rst=0;
+	#5
+	button=1;
+	rst=0;
+	#5
+	button=1;
+	rst=0;
+	#5
+	button=1;
+	rst=0;
+	#5
+	button=1;
+	rst=0;
+	#5
 	button=1;
 	rst=0;
 	#5
@@ -77,12 +97,13 @@ initial begin
 	#5
 	button=0;
 	rst=0;
+	
 	end
 	
 	
 	
 initial begin
-        #500
+        #200
         if (err==0)
           $display("***TEST PASSED! :) ***");
         $finish;
