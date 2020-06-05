@@ -28,9 +28,9 @@ wire [2:0]throw;
 wire [2:0]colour;
 //assign colour = {red, green, blue};
 
-top_dice b[2:0](button,clk,rst,throw);
-top_lights a[2:0](clk,colour[2],colour[1],colour[0]);
-top_mux c[2:0](throw,colour,sel,result);
+top_dice (button,clk,rst,throw);
+top_lights (clk,colour[2],colour[1],colour[0]);
+top_mux (throw,colour,sel,result);
 
 
 

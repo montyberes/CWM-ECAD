@@ -12,10 +12,14 @@ module top_tb( );
 
 parameter CLK_PERIOD = 10;
 
+reg err;
 reg rst;
 reg clk;
 reg button;
 reg sel;
+reg [2:0] prev_throw;
+wire [2:0] throw;
+wire colour[2:0];
 wire [2:0]result;
 
 	//parameter CLK_PERIOD = 10;
@@ -35,19 +39,27 @@ wire [2:0]result;
 	initial begin
 	//#5
 	forever begin
-	prev_throw=throw;
-	#5
+	#10
+	//prev_throw=throw;
 	//if (button==1) begin
 	//prev_throw<=(prev_throw<3'h6)?prev_throw+1:3'h1;
-	if ((button==1)&(prev_throw!=throw))begin
-	$display("***TEST FAILED! rst==%d, button==%d, throw==%d, prev_throw==%d***", rst, button, throw, prev_throw);
+	if ((sel==1)&&(result=!throw))begin
+	$display("***FAILLLL! sel==%d, result==%d", sel, result);
 	  err =1;
 	end
 	else begin
 	err=0;
 	end
+	if ((sel==0)&&(result=!colour))begin
+	$display ("***FAILLLL! sel==%d, result==%d", sel, result);
+	err=1;
 	end
-end
+	else begin
+	err=err;
+	end
+	end
+	end
+
 	
 
 initial begin
@@ -59,51 +71,75 @@ initial begin
 	#5
 	button=1;
 	rst=0;
+	sel=0;
 	#5
 	button=1;
 	rst=0;
+	sel=0;
 	#5
 	button=1;
 	rst=0;
+	sel=1;
 	#5
 	button=1;
 	rst=0;
+	sel=1;
 	#5
 	button=1;
 	rst=0;
+	sel=1;
 	#5
 	button=1;
 	rst=0;
+	sel=1;
 	#5
 	button=1;
 	rst=0;
+	sel=1;
 	#5
 	button=1;
 	rst=0;
+	sel=1;
 	#5
 	button=1;
 	rst=0;
+	sel=1;
 	#5
 	button=1;
 	rst=0;
+	sel=0;
 	#5
 	button=1;
 	rst=0;
+	sel=0;
 	#5
 	button=1;
 	rst=0;
+	sel=0;
 	#5
 	button=1;
 	rst=0;
+	sel=0;
 	#5
 	button=1;
 	rst=0;
+	sel=0;
 	#5
 	button=1;
 	rst=0;
+	sel=1;
 	#5
 	button=0;
 	rst=0;
+	sel=0;
+	#5
+	button=0;
+	rst=0;
+	sel=0;
+	#5
+	button=0;
+	rst=0;
+	sel=0;
 	
 	end
 	
@@ -116,6 +152,15 @@ initial begin
         $finish;
       end
 
+
+dice top_dice(.button (button), .clk (clk),.rst (rst),.throw (throw));
+
+light top_lights(.clk (clk),.colour(colour));
+
+mux top_mux(.throw (throw),.colour (colour),.sel (sel),.result (result));
+endmodule
+
+
 dice top_dice(
     //Todo: add ports 
 	.sel(sel)
@@ -124,11 +169,6 @@ dice top_dice(
 	.button (button),
 	.result (resu;t)
 );
-
-endmodule
-
-
-
 //initial
 //	begin
 //	  clk=1'b0;
@@ -148,27 +188,27 @@ endmodule
   //    end 
 //	end
 
-lights top_lights(
-   //Todo: add ports 
-	.clk (clk),
-	.red (red),
-	.green (green),
-	.amber (amber)
-);
+//lights top_lights(
+  // //Todo: add ports 
+//	.clk (clk),
+//	.red (red),
+//	.green (green),
+//	.amber (amber)
+//);
 
-dice top_dice( 
-.button (button),
-.clk (clk),
-.rst (rst),
-.result (result));
+//dice top_dice( 
+//.button (button),
+//.clk (clk),
+//.rst (rst),
+//.result (result));
 
-mux top_mux( 
-.throw (throw),
-.colour (colour),
-.sel (sel),
-.result (result));
+//mux top_mux( 
+//.throw (throw),
+//.colour (colour),
+//.sel (sel),
+//.result (result));
 
-endmodule
+
 	 
 
 
