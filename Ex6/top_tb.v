@@ -19,7 +19,7 @@ reg button;
 reg sel;
 reg [2:0] prev_throw;
 wire [2:0] throw;
-wire colour[2:0];
+wire [2:0]colour;
 wire [2:0]result;
 
 	//parameter CLK_PERIOD = 10;
@@ -43,14 +43,14 @@ wire [2:0]result;
 	//prev_throw=throw;
 	//if (button==1) begin
 	//prev_throw<=(prev_throw<3'h6)?prev_throw+1:3'h1;
-	if ((sel==1)&&(result=!throw))begin
+	if ((sel==1)&&(result!=throw))begin
 	$display("***FAILLLL! sel==%d, result==%d", sel, result);
 	  err =1;
 	end
 	else begin
 	err=0;
 	end
-	if ((sel==0)&&(result=!colour))begin
+	if ((sel==0)&&(result!=colour))begin
 	$display ("***FAILLLL! sel==%d, result==%d", sel, result);
 	err=1;
 	end
@@ -153,22 +153,23 @@ initial begin
       end
 
 
-dice top_dice(.button (button), .clk (clk),.rst (rst),.throw (throw));
+dice_or_lights top(.rst (rst),.clk (clk),.button (button),.sel (sel),.result (result));
 
-light top_lights(.clk (clk),.colour(colour));
+//light top_lights(.clk (clk),.colour(colour));
 
-mux top_mux(.throw (throw),.colour (colour),.sel (sel),.result (result));
+//mux top_mux(.throw (throw),.colour (colour),.sel (sel),.result (result));
 endmodule
 
+//input rst, input clk, input button, input sel, output reg [2:0]result);
 
-dice top_dice(
+//dice top_dice(
     //Todo: add ports 
-	.sel(sel)
-	.clk (clk),
-	.rst (rst),
-	.button (button),
-	.result (resu;t)
-);
+//	.sel(sel)
+//	.clk (clk),
+//	.rst (rst),
+//	.button (button),
+//	.result (resu;t)
+//);
 //initial
 //	begin
 //	  clk=1'b0;

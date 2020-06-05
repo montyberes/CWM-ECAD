@@ -21,17 +21,26 @@
 //////////////////////////////////////////////////////////////////////////////////
 `timescale 1ns / 100ps
 
-module dice_or_lights(input rst, input clk, input button, input sel, output reg [2:0]result);
+module dice_or_lights(input rst, input clk, input button, input sel, output [2:0]result);
 
 //top_lights a[2:0](clk, red, amber, green)
 wire [2:0]throw;
 wire [2:0]colour;
 //assign colour = {red, green, blue};
 
-top_dice (button,clk,rst,throw);
-top_lights (clk,colour[2],colour[1],colour[0]);
-top_mux (throw,colour,sel,result);
 
+dice top_dice(button,clk,rst,throw);
+lights top_lights(clk,colour[2],colour[1],colour[0]);
 
+assign result=(sel==0)?throw:colour;
 
 endmodule
+
+
+
+
+//top_mux (throw,colour,sel,result);
+
+
+
+//endmodule
