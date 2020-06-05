@@ -24,9 +24,12 @@
 module dice_or_lights(input rst, input clk, input button, input sel, output [2:0]result);
 
 //top_lights a[2:0](clk, red, amber, green)
+wire red;
+wire green;
+wire blue;
 wire [2:0]throw;
 wire [2:0]colour;
-//assign colour = {red, green, blue};
+assign colour = {red, green, blue};
 
 
 dice top_dice(button,clk,rst,throw);

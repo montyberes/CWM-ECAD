@@ -128,6 +128,82 @@ initial begin
 	button=1;
 	rst=0;
 	sel=1;
+#5
+	button=1;
+	rst=0;
+	sel=1;
+#5
+	button=1;
+	rst=0;
+	sel=1;
+#5
+	button=1;
+	rst=0;
+	sel=1;
+#5
+	button=1;
+	rst=0;
+	sel=1;
+#5
+	button=1;
+	rst=0;
+	sel=1;
+#5
+	button=1;
+	rst=0;
+	sel=1;
+#5
+	button=1;
+	rst=0;
+	sel=0;
+#5
+	button=1;
+	rst=0;
+	sel=0;
+#5
+	button=1;
+	rst=0;
+	sel=0;
+#5
+	button=1;
+	rst=0;
+	sel=0;
+#5
+	button=1;
+	rst=0;
+	sel=0;
+#5
+	button=1;
+	rst=0;
+	sel=0;
+#5
+	button=1;
+	rst=0;
+	sel=0;
+#5
+	button=1;
+	rst=0;
+	sel=1;
+#5
+	button=1;
+	rst=0;
+	sel=1;
+#5
+	button=1;
+	rst=0;
+	sel=1;
+#5
+	button=1;
+	rst=0;
+	sel=1;
+#5
+	button=1;
+	rst=0;
+	sel=1;
+#5
+	button=1;
+	rst=0;
+	sel=1;
 	#5
 	button=0;
 	rst=0;
