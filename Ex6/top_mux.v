@@ -22,8 +22,8 @@
 
 module mux(
     //Todo: define inputs here
-	input a,
-	input b,
+	input [2:0]a,
+	input [2:0]b,
 	input sel,
 	output out
     );

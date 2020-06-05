@@ -20,7 +20,7 @@ create_fileset -constrset -quiet constraints
 #set_property is_enabled false [get_files ${project_constraints}]
 
 #Todo: Add your IP here
-create_ip_run [get_files -of_objects [get_fileset sources_1] /home/centos/CWM-ECAD/Ex7/Ex7.srcs/sources_1/ip/times_table_ex7/times_table_ex7.xci]
+create_ip -name blk_mem_gen -vendor xilinx.com -library ip -version 8.4 -module_name times_table/sources_1/ip/times_table_ex7/times_table_ex7.xci]
 set_property -dict [list CONFIG.Component_Name {times_table_ex7}] [get_ips times_table_ex7]
 
 

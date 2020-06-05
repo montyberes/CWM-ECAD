@@ -21,11 +21,12 @@ create_fileset -constrset -quiet constraints
 #set_property is_enabled false [get_files ${project_constraints}]
 
 #Todo: add verilog modules here
-read_verilog "top.v"
-read_verilog "top_tb.v"
 read_verilog "top_mux.v"
 read_verilog "top_dice.v"
 read_verilog "top_lights.v"
+read_verilog "top.v"
+read_verilog "top_tb.v"
+
 
 update_compile_order -fileset sources_1
 update_compile_order -fileset sim_1
